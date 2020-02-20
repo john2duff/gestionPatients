@@ -101,17 +101,15 @@ public class Controller {
     //si nouveau existe alors on l'ouvre sinon on le créé
     public void newDataBasePatient() {
         if (databaseExist(getCheminDataBase() + "/" + dataBasePatientName)){
-            ouvreDataBase(getCheminDataBase() + "/" + dataBasePatientName);
+            //ouvreDataBase(getCheminDataBase() + "/" + dataBasePatientName);
             updateInfo("Ouverture de la base de données existante.");
         }else{
-            currentTournoi = new Tournoi("Nouveau tournoi", Tournoi.TypeTournoi.SIMPLE, 5, 5);
+            currentDataBase = new DataBasePatient(dataBasePatientName, this);
             try{
-                enregistreTournoi();
-                primaryStage.setTitle(currentTournoi.nomTournoi);
-                vueGeneral.ouvreTournoi();
+                currentDataBase.save();
+                primaryStage.setTitle(currentDataBase.nomDataBase);
             }catch( Exception e){
-                updateInfo("Problème pour enregistrer Nouveau tournoi.trn");
-                currentTournoi = null;
+                updateInfo("Problème pour enregistrer la base de donnée");
             }
         }
     }
@@ -132,34 +130,11 @@ public class Controller {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            if (patientExist(getCheminDataBase() + "/" + result.get() + ".trn")){
-                updateInfo("Patient déjà existant");
+            /*if (patientExist(getCheminDataBase() + "/" + result.get() + ".trn")){
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Patient existant");
-                alert.setHeaderText("Le fichier " + result.get() + " existe déjà.");
-                alert.setContentText("Voulez-vous l'écraser ?");
-
-                Stage dialogStage2 = (Stage) alert.getDialogPane().getScene().getWindow();
-                dialogStage2.getIcons().add(APPLICATION_ICON);
-
-                Optional<ButtonType> result2 = alert.showAndWait();
-                if (result2.get() == ButtonType.OK){
-                    currentTournoi.setNomTournoi(result.get());
-                    enregistreTournoi();
-                } else {
-                    updateInfo("Renommage annulé");
-                }
             }else{
-                renommerTournoi2(getCheminTournois()+ "/" + currentTournoi.nomTournoi + ".trn", getCheminTournois()+ "/" + result.get() + ".trn", result.get());
-                String save = currentTournoi.nomTournoi;
-                currentTournoi.setNomTournoi(result.get());
-                if (enregistreTournoi()){
-                    primaryStage.setTitle(currentTournoi.nomTournoi);
-                }else{
-                    currentTournoi.setNomTournoi(save);
-                }
-            }
+
+            }*/
 
         }
     }

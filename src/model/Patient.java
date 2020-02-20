@@ -7,13 +7,13 @@ import java.util.Objects;
 
 public class Patient implements Serializable{
 
-    public enum Sexe {HOMME, FEMME;};
+    public enum Sexe { HOMME, FEMME };
 
-    private String prenom;
-    private String nom;
-    private Sexe sexe;
+    public String prenom;
+    public String nom;
+    public Sexe sexe;
     public Date dateNaissance;
-    private ArrayList<Dossier> dossiers;
+    public ArrayList<Dossier> dossiers;
 
     public Patient(String nom, String prenom, Sexe sexe, Date dateNaissance) {
         this.nom = nom;
@@ -21,7 +21,7 @@ public class Patient implements Serializable{
         this.nom = nom;
         this.sexe = sexe;
         this.dateNaissance = dateNaissance;
-        dossiers.clear();
+        dossiers = new ArrayList<>();
     }
 
     @Override
